@@ -1,1 +1,4 @@
-img {}
+.images {
+    float: left;
+    margin: auto;
+}

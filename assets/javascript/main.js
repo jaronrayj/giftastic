@@ -58,7 +58,7 @@ function renderGifs() {
                 const still = response.data[i].images.fixed_width_still.url;
                 const rating = response.data[i].rating.toUpperCase();
                 var newP = $("<p>").text("Rating: " + rating);
-                newDiv = $("<div>").addClass("col-md-4");
+                newDiv = $("<div>").addClass("col-md-4 images");
                 var img = $("<img src=" + gif + ">").val("animate").attr("data-animate", gif).attr("data-still", still);
                 newDiv.append(img);
                 newDiv.prepend(newP);
