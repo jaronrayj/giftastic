@@ -13,9 +13,27 @@ function renderButtons() {
     }
 }
 
+
+// Grab val from input form and push to topics and create the new button
+$("#addButton").on("click", function (event) {
+
+    event.preventDefault();
+
+    newQuery = $("#textInput").val().trim();
+    $("#textInput").val("");
+    topics.push(newQuery);
+    renderButtons();
+
+});
+
 $(document).on("click", "button", function () {
 
     var food = $(this).val().trim();
+
+    // List how many gifs to pull
+    var limit;
+
+    // another button that will copy url to clipboard
 
     $.ajax({
         type: "GET",
@@ -28,7 +46,7 @@ $(document).on("click", "button", function () {
                 const still = response.data[i].images.fixed_width_still.url;
                 const rating = response.data[i].rating.toUpperCase();
                 var newP = $("<p>").text("Rating: " + rating);
-                newDiv = $("<div>");
+                newDiv = $("<div>").addClass("col-md-4");
                 var img = $("<img src=" + still + ">").val("still").attr("data-animate", gif).attr("data-still", still);
                 newDiv.append(img);
                 newDiv.prepend(newP);
