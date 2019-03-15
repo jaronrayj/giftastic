@@ -68,8 +68,8 @@ function renderGifs() {
                 var newP = $("<p>").text("Rating: " + rating).addClass("mb-0");
                 newDiv = $("<div>").addClass("col-md-4 images mb-4");
                 var img = $("<img src=" + gif + ">").val("animate").attr("data-animate", gif).attr("data-still", still);
-                var fav = $("<img src='./assets/images/clearHeart.png'>").addClass("heart").val("clear");
-                var copy = $("<img src='./assets/images/copy.png'>").addClass("copy");
+                var fav = $("<img src='./assets/images/clearHeart.png'>").addClass("heart mr-4").val("clear");
+                var copy = $("<img src='./assets/images/copy.png'>").addClass("copy ml-4");
                 copy.val(gif)
                 fav.attr("data-gif", gif);
                 newP.prepend(fav);
@@ -134,6 +134,9 @@ $("#favs").on("click", function () {
         var img = $("<img src=" + gif + ">");
         var fav = $("<img src='./assets/images/colorHeart.png'>").addClass("heart").val("fav");
         fav.attr("data-gif", gif);
+        var copy = $("<img src='./assets/images/copy.png'>").addClass("copy");
+        copy.val(gif)
+        newP.append(copy);
         newP.prepend(fav);
         newDiv.append(img);
         newDiv.prepend(newP);
