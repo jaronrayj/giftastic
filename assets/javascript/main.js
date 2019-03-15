@@ -43,6 +43,12 @@ $(document).on("click", "button", function () {
 $(document).on("click", "img", function () {
     var val = $(this).val();
     if (val === "still") {
-        $(this).attr("src", this.attr("data-animate"))
+        var animate = $(this).attr("data-animate");
+        $(this).attr("src", animate).val("animate")
+
+    }
+    if (val === "animate") {
+        var still = $(this).attr("data-still");
+        $(this).attr("src", still).val("still")
     }
 });
