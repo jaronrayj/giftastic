@@ -148,8 +148,12 @@ $("#favs").on("click", function () {
 $(document).on("click", ".copy", function () {
 
     var gif = $(this).val();
-    gif.select();
     console.log(gif);
+    $("#alert").text(gif);
+    var copyText = document.getElementById("alert");
+    console.log(copyText);
+    copyText.select();
+
 
     document.execCommand("copy");
 });
