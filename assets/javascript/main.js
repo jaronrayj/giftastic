@@ -6,9 +6,9 @@ function renderButtons() {
     $("#buttons").empty();
     for (let i = 0; i < topics.length; i++) {
 
-        var button = $("<button>").addClass("button");
-        var food = topics[i];
-        button.attr("value", food).text(food);
+        var button = $("<button>").addClass("button btn btn-info");
+        var query = topics[i];
+        button.attr("value", query).text(query);
         $("#buttons").append(button);
     }
 }
@@ -26,14 +26,14 @@ $("#addButton").on("click", function (event) {
 
 });
 
-var food;
+var query = "pick something";
 var limit;
 var offset;
 
 $(document).on("click", ".button", function () {
 
 
-    food = $(this).val().trim();
+    query = $(this).val().trim();
 
     // List how many gifs to pull
     limit = $("#quantity").val();
@@ -50,7 +50,7 @@ $(document).on("click", ".button", function () {
 function renderGifs() {
     $.ajax({
         type: "GET",
-        url: "https://api.giphy.com/v1/gifs/search?api_key=kHPBy6JCURz27DaYABi3JRay2mVFzJ3T&q=" + food + "&limit=" + limit + "&offset=" + offset + "&rating=PG-13&lang=en",
+        url: "https://api.giphy.com/v1/gifs/search?api_key=kHPBy6JCURz27DaYABi3JRay2mVFzJ3T&q=" + query + "&limit=" + limit + "&offset=" + offset + "&rating=PG-13&lang=en",
         success: function (response) {
             $("#gifs").empty();
             for (let i = 0; i < response.data.length; i++) {
@@ -76,6 +76,7 @@ $(document).on("click", ".heart", function () {
     if (heartStatus === "clear") {
         $(this).attr("src", "./assets/images/colorHeart.png")
         $(this).val("fav")
+
     }
     if (heartStatus === "fav") {
         $(this).attr("src", "./assets/images/clearHeart.png")
