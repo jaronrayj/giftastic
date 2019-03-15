@@ -1,5 +1,6 @@
 var topics = ["Sushi", "Pizza", "Sandwich", "Soup", "Cake", "Pie", "Fig Newton"];
 var favs = [];
+var searches;
 renderButtons();
 
 function renderButtons() {
@@ -25,7 +26,9 @@ $("#addButton").on("click", function (event) {
     topics.push(newQuery);
 
     renderButtons();
-    var searches = JSON.stringify(topics)
+    query = newQuery;
+    renderGifs();
+    searches = JSON.stringify(topics)
     localStorage.setItem("choices", searches);
 
 });
@@ -66,7 +69,8 @@ function renderGifs() {
                 newDiv = $("<div>").addClass("col-md-4 images mb-4");
                 var img = $("<img src=" + gif + ">").val("animate").attr("data-animate", gif).attr("data-still", still);
                 var fav = $("<img src='./assets/images/clearHeart.png'>").addClass("heart").val("clear");
-                var copy = $("<img src='./assets/images/copy.png'>").addClass("copy").val(gif);
+                var copy = $("<img src='./assets/images/copy.png'>").addClass("copy");
+                copy.val(gif)
                 fav.attr("data-gif", gif);
                 newP.prepend(fav);
                 // var spacer = $("<div>").addClass("col-md-1");
@@ -139,9 +143,10 @@ $("#favs").on("click", function () {
 });
 
 $(document).on("click", ".copy", function () {
+
     var gif = $(this).val();
-    console.log(gif);
     gif.select();
+    console.log(gif);
 
     document.execCommand("copy");
 });
