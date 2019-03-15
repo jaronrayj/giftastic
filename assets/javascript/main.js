@@ -37,6 +37,7 @@ $(document).on("click", ".button", function () {
 
     // List how many gifs to pull
     limit = $("#quantity").val();
+    console.log(limit);
 
     offset = 0;
 
@@ -69,8 +70,10 @@ function renderGifs() {
     });
 }
 
+
+// NEEDS WORK
 $("#generate").on("click", function () {
-    offset = offset + limit;
+    offset = parseInt(offset) + parseInt(limit);
     console.log(offset);
     renderGifs();
 
