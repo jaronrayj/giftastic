@@ -4,6 +4,7 @@ renderButtons();
 
 function renderButtons() {
     $("#buttons").empty();
+    // topics = localStorage.getItem("choices")
     for (let i = 0; i < topics.length; i++) {
 
         var button = $("<button>").addClass("button btn btn-info");
@@ -22,7 +23,10 @@ $("#addButton").on("click", function (event) {
     newQuery = $("#textInput").val().trim();
     $("#textInput").val("");
     topics.push(newQuery);
+
     renderButtons();
+    var searches = JSON.stringify(topics)
+    localStorage.setItem("choices", searches);
 
 });
 
@@ -62,8 +66,12 @@ function renderGifs() {
                 newDiv = $("<div>").addClass("col-md-4 images mb-4");
                 var img = $("<img src=" + gif + ">").val("animate").attr("data-animate", gif).attr("data-still", still);
                 var fav = $("<img src='./assets/images/clearHeart.png'>").addClass("heart").val("clear");
+                var copy = $("<img src='./assets/images/copy.png'>").addClass("copy").val(gif);
                 fav.attr("data-gif", gif);
                 newP.prepend(fav);
+                // var spacer = $("<div>").addClass("col-md-1");
+                // newP.append(spacer);
+                newP.append(copy);
                 newDiv.append(img);
                 newDiv.prepend(newP);
                 $("#gifs").append(newDiv);
@@ -80,7 +88,6 @@ $(document).on("click", ".heart", function () {
         $(this).val("fav")
         var save = $(this).attr("data-gif");
         favs.push(save);
-        console.log(favs);
     }
     if (heartStatus === "fav") {
         $(this).attr("src", "./assets/images/clearHeart.png")
@@ -91,7 +98,6 @@ $(document).on("click", ".heart", function () {
                 favs.splice(i, 1);
             }
         }
-        console.log(favs);
     }
 });
 
@@ -130,4 +136,12 @@ $("#favs").on("click", function () {
         $("#gifs").append(newDiv);
 
     }
+});
+
+$(document).on("click", ".copy", function () {
+    var gif = $(this).val();
+    console.log(gif);
+    gif.select();
+
+    document.execCommand("copy");
 });
