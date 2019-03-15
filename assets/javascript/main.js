@@ -60,7 +60,8 @@ function renderGifs() {
                 var newP = $("<p>").text("Rating: " + rating);
                 newDiv = $("<div>").addClass("col-md-4 images");
                 var img = $("<img src=" + gif + ">").val("animate").attr("data-animate", gif).attr("data-still", still);
-                var fav = $("<img src='./'>")
+                var fav = $("<img src='./assets/images/clearHeart.png'>").addClass("heart").val("clear");
+                newP.append(fav);
                 newDiv.append(img);
                 newDiv.prepend(newP);
                 $("#gifs").append(newDiv);
@@ -69,6 +70,18 @@ function renderGifs() {
         }
     });
 }
+
+$(document).on("click", ".heart", function () {
+    var heartStatus = $(this).val()
+    if (heartStatus === "clear") {
+        $(this).attr("src", "./assets/images/colorHeart.png")
+        $(this).val("fav")
+    }
+    if (heartStatus === "fav") {
+        $(this).attr("src", "./assets/images/clearHeart.png")
+        $(this).val("clear")
+    }
+});
 
 
 $("#generate").on("click", function () {
