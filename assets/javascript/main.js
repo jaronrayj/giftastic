@@ -60,6 +60,7 @@ function renderGifs() {
                 var newP = $("<p>").text("Rating: " + rating);
                 newDiv = $("<div>").addClass("col-md-4 images");
                 var img = $("<img src=" + gif + ">").val("animate").attr("data-animate", gif).attr("data-still", still);
+                var fav = $("<img src='./'>")
                 newDiv.append(img);
                 newDiv.prepend(newP);
                 $("#gifs").append(newDiv);

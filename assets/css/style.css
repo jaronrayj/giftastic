@@ -2,3 +2,8 @@
     float: left;
     margin: auto;
 }
+
+input,
+button {
+    margin: 2px;
+}
