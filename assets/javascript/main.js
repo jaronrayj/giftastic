@@ -52,7 +52,6 @@ function renderGifs() {
         type: "GET",
         url: "https://api.giphy.com/v1/gifs/search?api_key=kHPBy6JCURz27DaYABi3JRay2mVFzJ3T&q=" + food + "&limit=" + limit + "&offset=" + offset + "&rating=PG-13&lang=en",
         success: function (response) {
-            console.log(response);
             $("#gifs").empty();
             for (let i = 0; i < response.data.length; i++) {
                 const gif = response.data[i].images.fixed_width.url;
@@ -60,7 +59,7 @@ function renderGifs() {
                 const rating = response.data[i].rating.toUpperCase();
                 var newP = $("<p>").text("Rating: " + rating);
                 newDiv = $("<div>").addClass("col-md-4");
-                var img = $("<img src=" + still + ">").val("still").attr("data-animate", gif).attr("data-still", still);
+                var img = $("<img src=" + gif + ">").val("animate").attr("data-animate", gif).attr("data-still", still);
                 newDiv.append(img);
                 newDiv.prepend(newP);
                 $("#gifs").append(newDiv);
@@ -71,12 +70,9 @@ function renderGifs() {
 }
 
 
-// NEEDS WORK
 $("#generate").on("click", function () {
     offset = parseInt(offset) + parseInt(limit);
-    console.log(offset);
     renderGifs();
-
 });
 
 $(document).on("click", "img", function () {
