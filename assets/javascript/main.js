@@ -1,12 +1,16 @@
 var topics = ["Sushi", "Pizza", "Sandwich", "Soup", "Cake", "Pie", "Fig Newton"];
 
-for (let i = 0; i < topics.length; i++) {
+renderButtons();
 
-    var button = $("<button>");
-    var food = topics[i];
-    button.attr("value", food).text(food);
-    $("#buttons").append(button);
+function renderButtons() {
+    $("#buttons").empty();
+    for (let i = 0; i < topics.length; i++) {
 
+        var button = $("<button>");
+        var food = topics[i];
+        button.attr("value", food).text(food);
+        $("#buttons").append(button);
+    }
 }
 
 $(document).on("click", "button", function () {
@@ -25,8 +29,8 @@ $(document).on("click", "button", function () {
                 const rating = response.data[i].rating.toUpperCase();
                 var newP = $("<p>").text("Rating: " + rating);
                 newDiv = $("<div>");
-                newDiv.val("still").attr("data-animate", gif).attr("data-still", still);
-                newDiv.append("<img src=" + still + ">");
+                var img = $("<img src=" + still + ">").val("still").attr("data-animate", gif).attr("data-still", still);
+                newDiv.append(img);
                 newDiv.prepend(newP);
                 $("#gifs").append(newDiv);
 
@@ -34,4 +38,11 @@ $(document).on("click", "button", function () {
         }
     });
 
+});
+
+$(document).on("click", "img", function () {
+    var val = $(this).val();
+    if (val === "still") {
+        $(this).attr("src", this.attr("data-animate"))
+    }
 });
