@@ -1,5 +1,5 @@
 var topics = ["Sushi", "Pizza", "Sandwich", "Soup", "Cake", "Pie", "Fig Newton"];
-
+var favs = [];
 renderButtons();
 
 function renderButtons() {
@@ -37,7 +37,6 @@ $(document).on("click", ".button", function () {
 
     // List how many gifs to pull
     limit = $("#quantity").val();
-    console.log(limit);
 
     offset = 0;
 
@@ -46,6 +45,8 @@ $(document).on("click", ".button", function () {
     renderGifs();
 
 });
+
+//Copy to clipboard document.execCommand("copy");
 
 function renderGifs() {
     $.ajax({
@@ -57,11 +58,12 @@ function renderGifs() {
                 const gif = response.data[i].images.fixed_width.url;
                 const still = response.data[i].images.fixed_width_still.url;
                 const rating = response.data[i].rating.toUpperCase();
-                var newP = $("<p>").text("Rating: " + rating);
-                newDiv = $("<div>").addClass("col-md-4 images");
+                var newP = $("<p>").text("Rating: " + rating).addClass("mb-0");
+                newDiv = $("<div>").addClass("col-md-4 images mb-4");
                 var img = $("<img src=" + gif + ">").val("animate").attr("data-animate", gif).attr("data-still", still);
                 var fav = $("<img src='./assets/images/clearHeart.png'>").addClass("heart").val("clear");
-                newP.append(fav);
+                fav.attr("data-gif", gif);
+                newP.prepend(fav);
                 newDiv.append(img);
                 newDiv.prepend(newP);
                 $("#gifs").append(newDiv);
@@ -76,11 +78,20 @@ $(document).on("click", ".heart", function () {
     if (heartStatus === "clear") {
         $(this).attr("src", "./assets/images/colorHeart.png")
         $(this).val("fav")
-
+        var save = $(this).attr("data-gif");
+        favs.push(save);
+        console.log(favs);
     }
     if (heartStatus === "fav") {
         $(this).attr("src", "./assets/images/clearHeart.png")
         $(this).val("clear")
+        var save = $(this).attr("data-gif");
+        for (var i = 0; i < favs.length; i++) {
+            if (favs[i] === save) {
+                favs.splice(i, 1);
+            }
+        }
+        console.log(favs);
     }
 });
 
@@ -95,10 +106,28 @@ $(document).on("click", "img", function () {
     if (val === "still") {
         var animate = $(this).attr("data-animate");
         $(this).attr("src", animate).val("animate");
-
     }
+
     if (val === "animate") {
         var still = $(this).attr("data-still");
         $(this).attr("src", still).val("still");
+    }
+});
+
+
+$("#favs").on("click", function () {
+    $("#gifs").empty();
+    for (let i = 0; i < favs.length; i++) {
+        const gif = favs[i];
+        var newP = $("<p>").addClass("mb-0");
+        newDiv = $("<div>").addClass("col-md-4 images mb-4");
+        var img = $("<img src=" + gif + ">");
+        var fav = $("<img src='./assets/images/colorHeart.png'>").addClass("heart").val("fav");
+        fav.attr("data-gif", gif);
+        newP.prepend(fav);
+        newDiv.append(img);
+        newDiv.prepend(newP);
+        $("#gifs").append(newDiv);
+
     }
 });
