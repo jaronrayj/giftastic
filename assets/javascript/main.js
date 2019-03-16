@@ -10,6 +10,7 @@ $(document).ready(function () {
     renderGifs();
 
 
+
     const favData = JSON.parse(localStorage.getItem("favs"))
     if (favData !== null)
         for (let i = 0; i < favData.length; i++) {
@@ -18,8 +19,13 @@ $(document).ready(function () {
 
         }
 
+    const searchData = JSON.parse(localStorage.getItem("searches"))
+    if (searchData !== null)
+        for (let i = 0; i < searchData.length; i++) {
+            const element = searchData[i];
+            searches.unshift(element)
 
-    // $("<input>").hide().addClass("alert alert-info").attr("role", "alert");
+        }
 
 
 
@@ -113,6 +119,8 @@ $(document).ready(function () {
         });
     }
 
+
+    ////////////////Will need to duplicate similar to save button searches
 
     // Favoriting ability
     $(document).on("click", ".heart", function () {
