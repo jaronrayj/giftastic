@@ -9,6 +9,16 @@ $(document).ready(function () {
     renderButtons();
     renderGifs();
 
+
+    const favData = JSON.parse(localStorage.getItem("favs"))
+    if (favData !== null)
+        for (let i = 0; i < favData.length; i++) {
+            const element = favData[i];
+            favs.unshift(element)
+
+        }
+
+
     // $("<input>").hide().addClass("alert alert-info").attr("role", "alert");
 
 
@@ -157,10 +167,9 @@ $(document).ready(function () {
 
     // Go to the favorites screen
     $("#favs").on("click", function () {
-        var retrieve = localStorage.getItem("favs")
-        console.log(retrieve);
-        favs.unshift(retrieve)
-        console.log(favs);
+
+
+
         $("#gifs").empty();
         for (let i = 0; i < favs.length; i++) {
             const gif = favs[i];
