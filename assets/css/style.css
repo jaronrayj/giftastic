@@ -23,3 +23,14 @@ button {
 .card {
     /* background-color: lightgrey; */
 }
+
+p {
+    text-align: center;
+}
+
+/* At the top level of your code
+@media screen and (min-width: 768px) {
+    article {
+        padding: 1rem 3rem;
+    }
+} */

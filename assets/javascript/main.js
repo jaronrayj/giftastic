@@ -1,10 +1,10 @@
 $(document).ready(function () {
     var topics = ["Sushi", "Pizza", "Sandwich", "Soup", "Cake", "Pie", "Fig Newton"];
     var favs = [];
-    var searches;
+    var searches = [];
     var limit = 10;
-    var offset;
-    var query = "pick something";
+    var offset = 0;
+    var query = topics[0];
 
     renderButtons();
     renderGifs();
@@ -25,6 +25,12 @@ $(document).ready(function () {
             button.attr("value", query).text(query);
             $("#buttons").append(button);
         }
+    }
+
+    function favsStorage() {
+        var upload = JSON.stringify(favs)
+        console.log(upload);
+        localStorage.setItem("favs", upload)
     }
 
 
@@ -106,6 +112,7 @@ $(document).ready(function () {
             $(this).val("fav")
             var save = $(this).attr("data-gif");
             favs.push(save);
+
         }
         if (heartStatus === "fav") {
             $(this).attr("src", "./assets/images/clearHeart.png")
@@ -117,6 +124,7 @@ $(document).ready(function () {
                 }
             }
         }
+        favsStorage();
     });
 
 
@@ -149,12 +157,16 @@ $(document).ready(function () {
 
     // Go to the favorites screen
     $("#favs").on("click", function () {
+        var retrieve = localStorage.getItem("favs")
+        console.log(retrieve);
+        favs.unshift(retrieve)
+        console.log(favs);
         $("#gifs").empty();
         for (let i = 0; i < favs.length; i++) {
             const gif = favs[i];
             var newP = $("<p>").addClass("mb-0");
-            newDiv = $("<div>").addClass("col-md-4 images mb-4");
-            var img = $("<img src=" + gif + ">");
+            newDiv = $("<div>").addClass("col-md-4 images mb-4 card");
+            var img = $("<img src=" + gif + ">").addClass("mb-3");
             var fav = $("<img src='./assets/images/colorHeart.png'>").addClass("heart").val("fav");
             fav.attr("data-gif", gif);
             var copy = $("<img src='./assets/images/copy.png'>").addClass("copy");
