@@ -88,6 +88,10 @@ $(document).ready(function () {
 
     });
 
+    $('.grid').masonry({
+        // options
+        itemSelector: '.grid-item',
+    });
 
 
     // Populate all of the gifs on the page
@@ -120,7 +124,30 @@ $(document).ready(function () {
     }
 
 
-    ////////////////Will need to duplicate similar to save button searches
+
+    // Button ability
+    // $(document).on("click", ".heart", function () {
+    //     var heartStatus = $(this).val()
+    //     if (heartStatus === "clear") {
+    //         $(this).attr("src", "./assets/images/colorHeart.png")
+    //         $(this).val("fav")
+    //         var save = $(this).attr("data-gif");
+    //         favs.push(save);
+
+    //     }
+    //     if (heartStatus === "fav") {
+    //         $(this).attr("src", "./assets/images/clearHeart.png")
+    //         $(this).val("clear")
+    //         var save = $(this).attr("data-gif");
+    //         for (var i = 0; i < favs.length; i++) {
+    //             if (favs[i] === save) {
+    //                 favs.splice(i, 1);
+    //             }
+    //         }
+    //     }
+    //     favsStorage();
+    // });
+
 
     // Favoriting ability
     $(document).on("click", ".heart", function () {

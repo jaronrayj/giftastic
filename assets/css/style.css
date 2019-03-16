@@ -1,13 +1,15 @@
 body {
-    /* background-image: url('../images//aurora.jpg'); */
+    background-image: url('../images/Clean-Background-White.png');
     /* background-color: grey; */
     /* color: white; */
     margin-top: 15px;
+
 }
 
 .images {
-    float: left;
-    margin: auto;
+    vertical-align: top;
+    display: inline-block;
+
 }
 
 input,
@@ -20,17 +22,6 @@ button {
     /* top: -1000px; */
 }
 
-.card {
-    /* background-color: lightgrey; */
-}
-
 p {
     text-align: center;
 }
-
-/* At the top level of your code
-@media screen and (min-width: 768px) {
-    article {
-        padding: 1rem 3rem;
-    }
-} */
