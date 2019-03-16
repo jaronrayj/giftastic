@@ -1,3 +1,10 @@
+body {
+    /* background-image: url('../images//aurora.jpg'); */
+    /* background-color: grey; */
+    /* color: white; */
+    margin-top: 15px;
+}
+
 .images {
     float: left;
     margin: auto;
@@ -6,4 +13,13 @@
 input,
 button {
     margin: 2px;
+}
+
+#alert {
+    z-index: -1;
+    /* top: -1000px; */
+}
+
+.card {
+    /* background-color: lightgrey; */
 }
