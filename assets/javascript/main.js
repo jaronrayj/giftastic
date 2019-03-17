@@ -140,6 +140,7 @@ $(document).ready(function () {
     }
 
 
+    // todo Set up to retain buttons/ will need a system to remove them also if set up
 
     // Button ability
     // $(document).on("click", ".heart", function () {
@@ -243,7 +244,7 @@ $(document).ready(function () {
     }
 
 
-    // Copy the URL to paste it elsewhere
+    // *Copy the URL to paste it elsewhere
     $(document).on("click", ".copy", function () {
 
         $('<div>Copied!</div>').insertAfter('#favs').addClass("copied").delay(2000).fadeOut();
@@ -257,7 +258,7 @@ $(document).ready(function () {
 
         document.execCommand("copy");
 
-        // Briefly Show messsage that copy is compvare
+        // *Briefly Show messsage that copy is compvare
     });
 
 
