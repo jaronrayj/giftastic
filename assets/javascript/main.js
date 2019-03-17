@@ -1,42 +1,40 @@
-// todo Default page favs
+// // Default page favs
 // todo standard box size
 // todo Directions?
-// todo If query blank, don't process
-// todo default to 9 images
+// // If query blank, don't process
+// // default to 9 images
 // todo Decrease offset if<
-// todo Show favorites when loading if array includes favs
-// * Hotkey to move to search field
+// // Show favorites when loading if array includes favs
+// todo Hotkey to move to search field
 
 
 $(document).ready(function () {
     var topics = ["Sushi", "Pizza", "Sandwich", "Soup", "Cake", "Pie", "Fig Newton"];
     var favs = [];
     var searches = [];
-    var limit = 10;
+    var limit;
     var offset = 0;
-    var query = topics[0];
-
-    renderButtons();
-    renderGifs();
+    var query;
 
 
 
-    const favData = JSON.parse(localStorage.getItem("favs"))
+
+
+    var favData = JSON.parse(localStorage.getItem("favs"))
     if (favData !== null)
-        for (let i = 0; i < favData.length; i++) {
-            const element = favData[i];
+        for (var i = 0; i < favData.length; i++) {
+            var element = favData[i];
             favs.unshift(element)
 
         }
 
-    const searchData = JSON.parse(localStorage.getItem("searches"))
+    var searchData = JSON.parse(localStorage.getItem("searches"))
     if (searchData !== null)
-        for (let i = 0; i < searchData.length; i++) {
-            const element = searchData[i];
+        for (var i = 0; i < searchData.length; i++) {
+            var element = searchData[i];
             searches.unshift(element)
 
         }
-
 
 
 
@@ -44,7 +42,7 @@ $(document).ready(function () {
     function renderButtons() {
         $("#buttons").empty();
         // topics = localStorage.getItem("choices")
-        for (let i = 0; i < topics.length; i++) {
+        for (var i = 0; i < topics.length; i++) {
 
             var button = $("<button>").addClass("button btn btn-info");
             var query = topics[i];
@@ -55,9 +53,12 @@ $(document).ready(function () {
 
     function favsStorage() {
         var upload = JSON.stringify(favs)
-        console.log(upload);
+        console.log("TCL: favsStorage -> upload", upload);
         localStorage.setItem("favs", upload)
     }
+
+    renderButtons();
+    renderFavs();
 
 
     // Grab val from input form and push to topics and create the new button
@@ -66,12 +67,17 @@ $(document).ready(function () {
         event.preventDefault();
 
         newQuery = $("#textInput").val().trim();
-        $("#textInput").val("");
-        topics.push(newQuery);
+        if (newQuery !== "") {
 
-        renderButtons();
-        query = newQuery;
-        renderGifs();
+            $("#textInput").val("");
+            topics.push(newQuery);
+
+            renderButtons();
+            query = newQuery;
+            renderGifs();
+        } else {
+            console.log("Put something in the box.....");
+        }
         // searches = JSON.stringify(topics)
         // localStorage.setItem("choices", searches);
 
@@ -101,19 +107,24 @@ $(document).ready(function () {
 
     // Populate all of the gifs on the page
     function renderGifs() {
+
         $.ajax({
             type: "GET",
             url: "https://api.giphy.com/v1/gifs/search?api_key=kHPBy6JCURz27DaYABi3JRay2mVFzJ3T&q=" + query + "&limit=" + limit + "&offset=" + offset + "&rating=PG-13&lang=en",
             success: function (response) {
                 $("#gifs").empty();
-                for (let i = 0; i < response.data.length; i++) {
-                    const gif = response.data[i].images.fixed_width.url;
-                    const still = response.data[i].images.fixed_width_still.url;
-                    const rating = response.data[i].rating.toUpperCase();
+                for (var i = 0; i < response.data.length; i++) {
+                    var gif = response.data[i].images.fixed_width.url;
+                    var still = response.data[i].images.fixed_width_still.url;
+                    var rating = response.data[i].rating.toUpperCase();
                     var newP = $("<p>").text("Rating: " + rating).addClass("mb-0");
                     newDiv = $("<div>").addClass("col-md-4 images mb-4 card grid-item");
                     var img = $("<img src=" + gif + ">").val("animate").attr("data-animate", gif).attr("data-still", still).addClass("mb-3");
-                    var fav = $("<img src='./assets/images/clearHeart.png'>").addClass("heart mr-4").val("clear");
+                    if (favs.includes(gif)) {
+                        var fav = $("<img src='./assets/images/colorHeart.png'>").addClass("heart mr-4").val("fav");
+                    } else {
+                        var fav = $("<img src='./assets/images/clearHeart.png'>").addClass("heart mr-4").val("clear");
+                    }
                     var copy = $("<img src='./assets/images/copy.png'>").addClass("copy ml-4");
                     copy.val(gif)
                     fav.attr("data-gif", gif);
@@ -208,11 +219,13 @@ $(document).ready(function () {
     // Go to the favorites screen
     $("#favs").on("click", function () {
 
+        renderFavs();
+    });
 
-
+    function renderFavs() {
         $("#gifs").empty();
-        for (let i = 0; i < favs.length; i++) {
-            const gif = favs[i];
+        for (var i = 0; i < favs.length; i++) {
+            var gif = favs[i];
             var newP = $("<p>").addClass("mb-0");
             newDiv = $("<div>").addClass("col-md-4 images mb-4 card");
             var img = $("<img src=" + gif + ">").addClass("mb-3");
@@ -227,7 +240,7 @@ $(document).ready(function () {
             $("#gifs").append(newDiv);
 
         }
-    });
+    }
 
 
     // Copy the URL to paste it elsewhere
@@ -244,7 +257,7 @@ $(document).ready(function () {
 
         document.execCommand("copy");
 
-        // Briefly Show messsage that copy is complete
+        // Briefly Show messsage that copy is compvare
     });
 
 
