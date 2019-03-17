@@ -1,11 +1,11 @@
-// To do - Set alert for when gif copied
-// standard box size
-// Directions?
-// If query blank, don't process
-// default to 9 images
-// Decrease offset if<
-// Show favorites when loading if array includes favs
-// Hotkey to move to search field
+// todo Default page favs
+// todo standard box size
+// todo Directions?
+// todo If query blank, don't process
+// todo default to 9 images
+// todo Decrease offset if<
+// todo Show favorites when loading if array includes favs
+// * Hotkey to move to search field
 
 
 $(document).ready(function () {
