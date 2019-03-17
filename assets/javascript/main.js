@@ -1,3 +1,13 @@
+// To do - Set alert for when gif copied
+// standard box size
+// Directions?
+// If query blank, don't process
+// default to 9 images
+// Decrease offset if<
+// Show favorites when loading if array includes favs
+// Hotkey to move to search field
+
+
 $(document).ready(function () {
     var topics = ["Sushi", "Pizza", "Sandwich", "Soup", "Cake", "Pie", "Fig Newton"];
     var favs = [];
@@ -88,11 +98,6 @@ $(document).ready(function () {
 
     });
 
-    $('.grid').masonry({
-        // options
-        itemSelector: '.grid-item',
-    });
-
 
     // Populate all of the gifs on the page
     function renderGifs() {
@@ -106,7 +111,7 @@ $(document).ready(function () {
                     const still = response.data[i].images.fixed_width_still.url;
                     const rating = response.data[i].rating.toUpperCase();
                     var newP = $("<p>").text("Rating: " + rating).addClass("mb-0");
-                    newDiv = $("<div>").addClass("col-md-4 images mb-4 card");
+                    newDiv = $("<div>").addClass("col-md-4 images mb-4 card grid-item");
                     var img = $("<img src=" + gif + ">").val("animate").attr("data-animate", gif).attr("data-still", still).addClass("mb-3");
                     var fav = $("<img src='./assets/images/clearHeart.png'>").addClass("heart mr-4").val("clear");
                     var copy = $("<img src='./assets/images/copy.png'>").addClass("copy ml-4");
@@ -228,6 +233,8 @@ $(document).ready(function () {
     // Copy the URL to paste it elsewhere
     $(document).on("click", ".copy", function () {
 
+        $('<div>Copied!</div>').insertAfter('#favs').addClass("copied").delay(2000).fadeOut();
+
         var gif = $(this).val();
         var res = gif.replace("200w.gif", "giphy.gif")
         $("#alert").empty().attr("value", res);
@@ -236,7 +243,10 @@ $(document).ready(function () {
 
 
         document.execCommand("copy");
+
+        // Briefly Show messsage that copy is complete
     });
+
 
 
 });

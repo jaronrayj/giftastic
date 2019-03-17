@@ -3,6 +3,7 @@ body {
     /* background-color: grey; */
     /* color: white; */
     margin-top: 15px;
+    font-family: 'Open Sans', sans-serif;
 
 }
 
@@ -19,9 +20,18 @@ button {
 
 #alert {
     z-index: -1;
-    /* top: -1000px; */
+    top: -1000px;
 }
 
 p {
     text-align: center;
+}
+
+.copied {
+    font-size: 30px;
+    background: red;
+    border: 2px solid black;
+    text-align: center;
+    color: white;
+    border-radius: 20px;
 }
