@@ -108,6 +108,8 @@ $(document).ready(function () {
     // Populate all of the gifs on the page
     function renderGifs() {
 
+        limit = $("#quantity").val();
+
         $.ajax({
             type: "GET",
             url: "https://api.giphy.com/v1/gifs/search?api_key=kHPBy6JCURz27DaYABi3JRay2mVFzJ3T&q=" + query + "&limit=" + limit + "&offset=" + offset + "&rating=PG-13&lang=en",
