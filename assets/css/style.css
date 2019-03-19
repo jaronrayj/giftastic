@@ -10,7 +10,7 @@ body {
 .images {
     vertical-align: top;
     display: inline-block;
-
+    text-align: center;
 }
 
 input,

@@ -1,11 +1,16 @@
 // // Default page favs
 // todo standard box size
 // todo Directions?
+// todo move buttons and 
 // // If query blank, don't process
 // // default to 9 images
 // todo Decrease offset if<
 // // Show favorites when loading if array includes favs
 // todo Hotkey to move to search field
+// *fdsfasfdasfdfdafads
+// ! fjdfksjdslfdsjfl
+// ?fdsafdfafd
+// todo
 
 
 $(document).ready(function () {
@@ -53,7 +58,6 @@ $(document).ready(function () {
 
     function favsStorage() {
         var upload = JSON.stringify(favs)
-        console.log("TCL: favsStorage -> upload", upload);
         localStorage.setItem("favs", upload)
     }
 
