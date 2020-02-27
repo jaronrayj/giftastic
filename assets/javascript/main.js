@@ -7,10 +7,7 @@
 // todo Decrease offset if<
 // // Show favorites when loading if array includes favs
 // todo Hotkey to move to search field
-// *fdsfasfdasfdfdafads
-// ! fjdfksjdslfdsjfl
-// ?fdsafdfafd
-// todo
+
 
 
 $(document).ready(function () {
@@ -20,10 +17,6 @@ $(document).ready(function () {
     var limit;
     var offset = 0;
     var query;
-
-
-
-
 
     var favData = JSON.parse(localStorage.getItem("favs"))
     if (favData !== null)
@@ -40,8 +33,6 @@ $(document).ready(function () {
             searches.unshift(element)
 
         }
-
-
 
     // Start up, pull from local storage
     function renderButtons() {
@@ -230,6 +221,7 @@ $(document).ready(function () {
     });
 
     function renderFavs() {
+        $("#header").text("Favorites");
         $("#gifs").empty();
         for (var i = 0; i < favs.length; i++) {
             var gif = favs[i];
